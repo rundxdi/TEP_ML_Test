@@ -1,0 +1,13 @@
+No VIs: 324.5099639892578 obj:508272.6676553159 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 384.7503352165222 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 140.97501635551453 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 1130.9945430755615 obj:508147.1429619975 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 159.68119549751282 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 140.5907690525055 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 135.7957718372345 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 134.21211194992065 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 136.43620228767395 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 133.60976457595825 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 145.23099160194397 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 142.22770762443542 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 
+No VIs: 143.65688562393188 obj:508147.14296199684 pglib-opf-master/pglib_opf_case300_ieee.m 

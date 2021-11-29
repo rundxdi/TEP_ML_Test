@@ -1,0 +1,4 @@
+cycle vis: 516.7319316864014 obj:508390.5502518414 pglib-opf-master/pglib_opf_case300_ieee.m 123456 123456 
+cycle vis: 469.70466351509094 obj:508390.5502518414 pglib-opf-master/pglib_opf_case300_ieee.m 123456 123456 
+cycle vis: 2466.402982234955 obj:508390.5502518363 pglib-opf-master/pglib_opf_case300_ieee.m 123456 123456 
+cycle vis: 514.8718571662903 obj:508390.5502518529 pglib-opf-master/pglib_opf_case300_ieee.m 123456 123456 

@@ -1,0 +1,225 @@
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:02:45 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:10:36 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:12:00 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:12:56 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:14:28 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:16:00 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:16:16 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:16:47 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
+
+Gurobi 9.0.2 (win64) logging started Mon Nov 22 14:18:13 2021
+
+Changed value of parameter LogFile to anor_test_0.txt
+   Prev:   Default: 
+Changed value of parameter MIPGap to 0.001
+   Prev: 0.0001  Min: 0.0  Max: inf  Default: 0.0001
+Gurobi Optimizer version 9.0.2 build v9.0.2rc0 (win64)
+Optimize a model with 34 rows, 48 columns and 114 nonzeros
+Model fingerprint: 0x00f56965
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+01]
+  Objective range  [8e+00, 2e+01]
+  Bounds range     [3e+01, 3e+02]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 22 rows and 34 columns
+Presolve time: 0.00s
+Presolved: 12 rows, 14 columns, 53 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.231302e+01   0.000000e+00      0s
+       9    8.2061052e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 9 iterations and 0.00 seconds
+Optimal objective  8.206105236e+02
