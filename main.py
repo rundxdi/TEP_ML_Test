@@ -5,8 +5,14 @@
 
 import TEP
 from miplearn import LearningSolver
-from miplearn import LazyConstraintsComponent
+from miplearn.instance.base import Instance
+from miplearn.solvers.learning import InternalSolver
+from miplearn.solvers.pyomo.base import BasePyomoSolver
+from miplearn.types import ConstraintName
+from miplearn import PrimalSolutionComponent
+from miplearn import ObjectiveValueComponent
 import time
+import pickle
 
 
 
@@ -35,39 +41,50 @@ if __name__ == '__main__':
                             'pglib-opf-master/pglib_opf_case240_pserc.m',
                             'pglib-opf-master/pglib_opf_case300_ieee.m']
     testInstanceFiles = ['pglib-opf-master/pglib_opf_case14_ieee.m',
-                         'pglib-opf-master/pglib_opf_case118_ieee.m',
-                         'pglib-opf-master/pglib_opf_case500_goc.m',
-                         'pglib-opf-master/pglib_opf_case793_goc_tep.m',
-                         'pglib-opf-master/pglib_opf_case500_goc_tep.m',
-                         'pglib-opf-master/pglib_opf_case2000_goc_tep.m']
+                         'pglib-opf-master/pglib_opf_case118_ieee.m',]
+                         #'pglib-opf-master/pglib_opf_case500_goc.m',
+                         #'pglib-opf-master/pglib_opf_case793_goc_tep.m',
+                         #'pglib-opf-master/pglib_opf_case500_goc_tep.m',
+                         #'pglib-opf-master/pglib_opf_case2000_goc_tep.m']
     trainingInstances = []
     testInstances = []
     
     
-    solver = LearningSolver(solver = 'gurobi')
-    comp = LazyConstraintsComponent()
+    solver = LearningSolver()
+
+
     for instance in trainingInstanceFiles:
         trainingInstances.append(TEP.TEPInstance(instance))
     for instance in testInstanceFiles:
         testInstances.append(TEP.TEPInstance(instance))
 
+    print("Now solving the training instances")
     for instance in trainingInstances:
         solver.solve(instance)
 
-    #solver.fit(trainingInstances)
+    print("Now fitting training instances to solver")
+    solver.fit(trainingInstances)
 
-    comp.fit(trainingInstances)
+    #pickle.dump(solver, open("solver.pickle", "wb"))
 
     for instance in testInstances:
         t = time.time()
-        solver.solve(instance)
+        print("Now solving instance ", str(instance))
+        stats = solver.solve(instance)
+        #print(stats['lp_log'])
+        #print(stats['mip_log'])
         print(time.time() - t)
         print()
 
 
     #comp.fit(trainingInstances)
+    print("Now evaluating the component?")
     #ev = comp.evaluate(testInstances)
+    #ev = solver.evaluate(testInstances)
+    #ev = prim.evaluate(testInstances)
     #import pandas as pd
-    #pd.DataFrame(ev).mean(axis=1)
+    #pd.DataFrame(ev['Fix one']).mean(axis=1)
+    #ev2 = obj.evaluate(testInstances)
+    #pd.DataFrame(ev2).mean(axis=1)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

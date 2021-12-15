@@ -10,6 +10,7 @@ from pyomo.environ import *
 class TEPInstance(Instance):
 
     def __init__(self, filename):
+        super().__init__()
         self.demand_scale = .01
         self.capacity_scale = 1
         self.gen_scale = 1
@@ -19,8 +20,8 @@ class TEPInstance(Instance):
         self.branch_data = np.array([])
         self.graph = nx.Graph()
         self.filename = filename
-        self.found_violated_lazy_constraints = []
-        self.lp_value=0
+        #self.found_violated_lazy_constraints = []
+        #self.lp_value=0
 
     def cycle_base(self):
         cycle_paths = []
@@ -120,20 +121,23 @@ class TEPInstance(Instance):
     '''
 
 
-
+    # TODO: Convert indexed constraints to individual constraints (for blah in blah, add blah to constraint list)
     def to_model(self):
         self.bus_data, self.gen_data, self.branch_data = mp.load_data(self.filename)
         mp.encode_graph(self.graph, self.bus_data, self.gen_data, self.branch_data, self.demand_scale, self.capacity_scale, self.gen_scale, self.cost_scale)
         mod = ConcreteModel()
         mod.graph = self.graph
         # Gather line status and cost properties for full graph
+
         mod.M = 2 * .6 * max({key: 1 / value for (key, value) in nx.get_edge_attributes(self.graph, 'branch_b').items()}.values())
+
         mod.edge_status = nx.get_edge_attributes(self.graph, 'branch_status')
         mod.edge_b = nx.get_edge_attributes(self.graph, 'branch_b')
         mod.expand_lines = [(i, j) for (i, j) in self.graph.edges if mod.edge_status[i, j] == 0]
         mod.recond_lines = [(i, j) for (i, j) in self.graph.edges if mod.edge_status[i, j] == 1]
         mod.expand_cost = nx.get_edge_attributes(self.graph, 'branch_cand_cost')
-        mod.found_violated_lazy_constraints = ConstraintList()
+        mod.found_violated_lazy_constraints = []
+        mod.ahhh_lazy = ConstraintList()
 
         # Add binary decision variables
         mod.expansion = Var(mod.expand_lines, within=Binary)
@@ -152,21 +156,32 @@ class TEPInstance(Instance):
         mod.bus_angle = Var(self.graph.nodes, bounds=(-30, 30))
 
         # Load flow constraints
-
         def load_cons_1(model,i,j):
             return (-1 / model.edge_b[i, j]) * (model.bus_angle[i] - model.bus_angle[j]) - model.corr_flow[i, j] + (1 - model.expansion[i, j]) * model.M >= 0
 
-        mod.load_cons_pos = Constraint(mod.expand_lines, rule = load_cons_1)
+        #mod.load_cons_pos = Constraint(mod.expand_lines, rule = load_cons_1)
+
+        mod.load_cons_pos = ConstraintList()
+        for (i,j) in mod.expand_lines:
+            mod.load_cons_pos.add((1 / mod.edge_b[i, j]) * mod.bus_angle[i] + (-1 / mod.edge_b[i, j]) *mod.bus_angle[j] + mod.corr_flow[i, j] + mod.M * mod.expansion[i, j] <= + 2 * .6 * max({key: 1 / value for (key, value) in nx.get_edge_attributes(self.graph, 'branch_b').items()}.values()))
 
         def load_cons_2(model,i,j):
             return (-1 / model.edge_b[i, j]) * (model.bus_angle[i] - model.bus_angle[j]) - model.corr_flow[i, j] - (1 - model.expansion[i, j]) * model.M <= 0
 
-        mod.load_cons_neg = Constraint(mod.expand_lines, rule = load_cons_2)
+        #mod.load_cons_neg = Constraint(mod.expand_lines, rule = load_cons_2)
+
+        mod.load_cons_neg = ConstraintList()
+        for (i,j) in mod.expand_lines:
+            mod.load_cons_neg.add((-1 / mod.edge_b[i, j]) * mod.bus_angle[i] - (-1 / mod.edge_b[i, j]) *mod.bus_angle[j] - mod.corr_flow[i, j] + mod.M *mod.expansion[i, j] <= 2 * .6 * max({key: 1 / value for (key, value) in nx.get_edge_attributes(self.graph, 'branch_b').items()}.values()))
 
         def load_cons_3(model,i,j):
-            return (-1/model.edge_b[i,j])*(model.bus_angle[i] - mod.bus_angle[j]) == mod.corr_flow[i,j]
+            return (-1/model.edge_b[i,j])*(model.bus_angle[i] - model.bus_angle[j]) == model.corr_flow[i,j]
 
-        mod.load_cons_eq = Constraint(mod.recond_lines, rule=load_cons_3)
+        #mod.load_cons_eq = Constraint(mod.recond_lines, rule=load_cons_3)
+
+        mod.load_cons_eq = ConstraintList()
+        for (i,j) in mod.recond_lines:
+            mod.load_cons_eq.add((-1/mod.edge_b[i,j])*mod.bus_angle[i] - (-1/mod.edge_b[i,j])*mod.bus_angle[j] == mod.corr_flow[i,j])
 
         # Load Capacity Constraints
 
@@ -175,15 +190,25 @@ class TEPInstance(Instance):
         def cap_cons_neg(model, i, j):
             return model.corr_flow[i, j] >= -model.graph.edges[i, j]['branch_cap'] * model.expansion[i, j]
 
-        mod.cap_cons_pos = Constraint(mod.expand_lines, rule = cap_cons_pos)
-        mod.cap_cons_neg = Constraint(mod.expand_lines, rule = cap_cons_neg)
+        #mod.cap_cons_pos = Constraint(mod.expand_lines, rule = cap_cons_pos)
+        #mod.cap_cons_neg = Constraint(mod.expand_lines, rule = cap_cons_neg)
+
+        mod.cap_cons_pos = ConstraintList()
+        mod.cap_cons_neg = ConstraintList()
+        for (i,j) in mod.expand_lines:
+            mod.cap_cons_pos.add(mod.corr_flow[i, j] <= mod.graph.edges[i, j]['branch_cap'] * mod.expansion[i, j])
+            mod.cap_cons_neg.add(mod.corr_flow[i, j] >= -mod.graph.edges[i, j]['branch_cap'] * mod.expansion[i, j])
 
         # Load balance constraints
 
         def balance_rule(model, i):
             return sum([model.corr_flow[j, i] for j in model.graph.neighbors(i) if j < i]) - sum([model.corr_flow[i, j] for j in model.graph.neighbors(i) if j > i]) + model.gen[i] == nx.get_node_attributes(model.graph, 'bus_pd')[i]
 
-        mod.load_balance = Constraint(mod.graph.nodes, rule=balance_rule)
+        #mod.load_balance = Constraint(mod.graph.nodes, rule=balance_rule)
+        
+        mod.load_balance = ConstraintList()
+        for i in mod.graph.nodes:
+            mod.load_balance.add(sum([mod.corr_flow[j, i] for j in mod.graph.neighbors(i) if j < i]) + sum([-mod.corr_flow[i, j] for j in mod.graph.neighbors(i) if j > i]) + mod.gen[i] == nx.get_node_attributes(mod.graph, 'bus_pd')[i])
 
         # Objective Function
 
@@ -197,32 +222,37 @@ class TEPInstance(Instance):
 
         return mod
 
-    def get_instance_features(self):
-        return np.array([1])
+    #def get_instance_features(self):
+    #    return np.array([1])
 
-    def get_variable_features(self, var_name, idx):
-        return np.array([1])
+    #def get_variable_features(self, var_name, idx):
+    #    return np.array([1])
 
-    def find_violated_lazy_constraints(self, model):
+    def find_violated_lazy_constraints(self, solver, model):
+        #print("Somehow, here we are finding violated lazy constraints from the model!")
         edge_status = nx.get_edge_attributes(self.graph, 'branch_status')
         violations = []
         for c in self.cycle_cuts:
             start, end, sp_length, mp_length, sp_e = c
-            lhs = model.bus_angle[start].x - model.bus_angle[end].x
-            rhs = sp_length + (mp_length - sp_length) * (len(sp_e) - gp.quicksum([model.expansion[edge].x for edge in sp_e if edge_status[edge] == 0]))
-            if 1:
-                print(c)
-                violations.append(c)
-                model.found_violated_lazy_constraints.append(c)
+            self.cycle_cuts.remove(c)
+            lhs = model.bus_angle[start].value - model.bus_angle[end].value
+            rhs = sp_length + (mp_length - sp_length) * (len(sp_e) - gp.quicksum([model.expansion[edge].value for edge in sp_e if edge_status[edge] == 0]))
+            if len(c) > 0:
+                #print(c)
+                violations.append(violations.append(",".join(map(str, c)).encode()))
+                #print(violations, len(violations))
+                model.found_violated_lazy_constraints.append(str(c))
+        #print("Somehow, we are exiting this round of finding violated lazy constraints from the model!")
         return violations
 
-    def build_lazy_constraint(self, model, idx):
+    def build_lazy_constraint(self, solver, model, idx):
+        print("And here we are building constraints??")
         edge_status = nx.get_edge_attributes(self.graph, 'branch_status')
         start, end, sp_length, mp_length, sp_e = self.cycle_cuts[idx]
         lhs = model.bus_angle[start] - model.bus_angle[end]
         rhs = sp_length + (mp_length - sp_length) * (len(sp_e) - gp.quicksum([model.expansion[edge] for edge in sp_e if edge_status[edge] == 0]))
         #self.found_violated_lazy_constraints.add(abs(lhs) <= rhs)
-        return model.found_violated_lazy_constraints.add(abs(lhs) <= rhs)
+        return model.ahhh_lazy.add_constraint(abs(lhs) <= rhs)
 
     def find_violated_user_cuts(self, model):
         return self.find_violated_lazy_constraints(model)
